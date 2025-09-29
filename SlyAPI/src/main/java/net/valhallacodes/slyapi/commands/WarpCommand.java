@@ -35,13 +35,13 @@ public class WarpCommand implements CommandExecutor {
                 stmt.setString(1, warpName);
                 try (ResultSet rs = stmt.executeQuery()) {
                     if (rs.next()) {
-                        var world = SlyAPI.getInstance().getServer().getWorld(rs.getString("world"));
+                        org.bukkit.World world = SlyAPI.getInstance().getServer().getWorld(rs.getString("world"));
                         if (world == null) {
                             player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.warp-world-not-found"));
                             return true;
                         }
                         
-                        var location = new org.bukkit.Location(
+                        org.bukkit.Location location = new org.bukkit.Location(
                                 world,
                                 rs.getDouble("x"),
                                 rs.getDouble("y"),

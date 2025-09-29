@@ -32,7 +32,7 @@ public class SetWarpCommand implements CommandExecutor {
         }
         
         String warpName = args[0];
-        var location = player.getLocation();
+        org.bukkit.Location location = player.getLocation();
         
         try (Connection conn = SlyAPI.getInstance().getDatabaseManager().getConnection()) {
             String sql = "INSERT INTO warps (name, world, x, y, z, yaw, pitch) VALUES (?, ?, ?, ?, ?, ?, ?) " +

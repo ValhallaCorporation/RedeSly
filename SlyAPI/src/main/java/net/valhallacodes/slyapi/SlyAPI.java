@@ -4,6 +4,7 @@ import net.milkbowl.vault.economy.Economy;
 import net.valhallacodes.slyapi.commands.*;
 import net.valhallacodes.slyapi.database.DatabaseManager;
 import net.valhallacodes.slyapi.listeners.PlayerListener;
+import net.valhallacodes.slyapi.listeners.TeleportListener;
 import net.valhallacodes.slyapi.managers.*;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -94,6 +95,7 @@ public class SlyAPI extends JavaPlugin {
     
     private void registerEvents() {
         getServer().getPluginManager().registerEvents(new PlayerListener(), this);
+        getServer().getPluginManager().registerEvents(new TeleportListener(), this);
     }
     
     public static SlyAPI getInstance() {

@@ -115,5 +115,3 @@ messages:
   tpa-accept-failed: "&cFalha ao aceitar teleporte!"
   tpa-deny-failed: "&cFalha ao negar teleporte!"
   tpa-failed: "&cFalha ao enviar solicitação de teleporte!"
-  
-  teleported-to-player: "&aTeleportado para &e%player%&a!"

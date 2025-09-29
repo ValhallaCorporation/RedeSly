@@ -1,0 +1,8 @@
+messages:
+  only-players: "&cEste comando só pode ser executado por jogadores!"
+  go-usage: "&cUso: /go <jogador>"
+  player-not-found: "&cJogador %player% não encontrado!"
+  cannot-teleport-self: "&cVocê não pode se teleportar para si mesmo!"
+  already-on-server: "&cVocê já está no mesmo servidor que o jogador!"
+  teleporting-to: "&aTeleportando para %player% no servidor %server%..."
+  staff-teleporting: "&e%staff% está se teleportando para você!"

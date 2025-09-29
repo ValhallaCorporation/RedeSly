@@ -26,7 +26,7 @@ public class HomesCommand implements CommandExecutor {
         
         Player player = (Player) sender;
         
-        var homes = SlyAPI.getInstance().getHomeManager().getPlayerHomes(player.getName());
+        java.util.List<String> homes = SlyAPI.getInstance().getHomeManager().getPlayerHomes(player.getName());
         
         if (homes.isEmpty()) {
             player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.no-homes"));
@@ -41,9 +41,9 @@ public class HomesCommand implements CommandExecutor {
         
         for (int i = 0; i < homes.size() && i < 54; i++) {
             String homeName = homes.get(i);
-            var homeInfo = SlyAPI.getInstance().getHomeManager().getHomeInfo(player.getName(), homeName);
+            net.valhallacodes.slyapi.managers.HomeManager.HomeInfo homeInfo = SlyAPI.getInstance().getHomeManager().getHomeInfo(player.getName(), homeName);
             
-            ItemStack item = new ItemStack(Material.BED);
+            ItemStack item = new ItemStack(Material.RED_BED);
             ItemMeta meta = item.getItemMeta();
             meta.setDisplayName(SlyAPI.getInstance().getConfig().getString("messages.home-item-name")
                     .replace("%home%", homeName));

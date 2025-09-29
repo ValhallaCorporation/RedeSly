@@ -23,7 +23,7 @@ public class HomeCommand implements CommandExecutor {
         }
         
         String homeName = args[0];
-        var homeLocation = SlyAPI.getInstance().getHomeManager().getHome(player.getName(), homeName);
+        org.bukkit.Location homeLocation = SlyAPI.getInstance().getHomeManager().getHome(player.getName(), homeName);
         
         if (homeLocation == null) {
             player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.home-not-found")
