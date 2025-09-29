@@ -2,6 +2,7 @@ package net.valhallacodes.slyapi.commands;
 
 import net.valhallacodes.slyapi.SlyAPI;
 import net.valhallacodes.slyapi.managers.ClanManager;
+import net.valhallacodes.slyapi.utils.MessageUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -20,7 +21,7 @@ public class ClanCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.only-players"));
+            MessageUtils.sendMessage(sender, SlyAPI.getInstance().getConfig().getString("messages.only-players"));
             return true;
         }
         
@@ -75,6 +76,10 @@ public class ClanCommand implements CommandExecutor {
                 break;
                 
             case "depositar":
+                if (SlyAPI.getInstance().getEconomy() == null) {
+                    MessageUtils.sendMessage(player, "&c&l[CLAN] &cSistema de economia não disponível! Instale um plugin de economia como EssentialsX.");
+                    return true;
+                }
                 if (args.length < 2) {
                     player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.clan-deposit-usage"));
                     return true;
@@ -88,6 +93,10 @@ public class ClanCommand implements CommandExecutor {
                 break;
                 
             case "sacar":
+                if (SlyAPI.getInstance().getEconomy() == null) {
+                    MessageUtils.sendMessage(player, "&c&l[CLAN] &cSistema de economia não disponível! Instale um plugin de economia como EssentialsX.");
+                    return true;
+                }
                 if (args.length < 2) {
                     player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.clan-withdraw-usage"));
                     return true;
@@ -325,7 +334,7 @@ public class ClanCommand implements CommandExecutor {
         }
         
         if (SlyAPI.getInstance().getEconomy().getBalance(player) < amount) {
-            player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.insufficient-funds"));
+            MessageUtils.sendMessage(player, SlyAPI.getInstance().getConfig().getString("messages.insufficient-funds"));
             return;
         }
         

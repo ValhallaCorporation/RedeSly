@@ -4,6 +4,7 @@ import net.milkbowl.vault.economy.Economy;
 import net.valhallacodes.slyapi.commands.*;
 import net.valhallacodes.slyapi.database.DatabaseManager;
 import net.valhallacodes.slyapi.listeners.PlayerListener;
+import net.valhallacodes.slyapi.listeners.GoTeleportListener;
 import net.valhallacodes.slyapi.listeners.TeleportListener;
 import net.valhallacodes.slyapi.managers.*;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -25,11 +26,7 @@ public class SlyAPI extends JavaPlugin {
     public void onEnable() {
         instance = this;
         
-        if (!setupEconomy()) {
-            getLogger().severe("Vault não encontrado! Desabilitando plugin...");
-            getServer().getPluginManager().disablePlugin(this);
-            return;
-        }
+        setupEconomy();
         
         createConfig();
         loadConfig();
@@ -67,16 +64,25 @@ public class SlyAPI extends JavaPlugin {
         reloadConfig();
     }
     
-    private boolean setupEconomy() {
+    private void setupEconomy() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
-            return false;
+            getLogger().warning("Vault plugin não encontrado! Recursos de economia desabilitados.");
+            return;
         }
+        
         RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
         if (rsp == null) {
-            return false;
+            getLogger().warning("Economy provider não encontrado! Recursos de economia desabilitados.");
+            return;
         }
+        
         economy = rsp.getProvider();
-        return economy != null;
+        if (economy == null) {
+            getLogger().warning("Falha ao obter economy provider! Recursos de economia desabilitados.");
+            return;
+        }
+        
+        getLogger().info("Economy conectado: " + economy.getName());
     }
     
     private void registerCommands() {
@@ -96,6 +102,8 @@ public class SlyAPI extends JavaPlugin {
     private void registerEvents() {
         getServer().getPluginManager().registerEvents(new PlayerListener(), this);
         getServer().getPluginManager().registerEvents(new TeleportListener(), this);
+        
+        getServer().getMessenger().registerIncomingPluginChannel(this, "slycore:go", new GoTeleportListener());
     }
     
     public static SlyAPI getInstance() {

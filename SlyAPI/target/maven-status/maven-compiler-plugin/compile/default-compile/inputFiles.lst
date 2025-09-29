@@ -1,3 +1,4 @@
+E:\projetosthunder\RedeSly\SlyAPI\src\main\java\net\valhallacodes\slyapi\listeners\GoTeleportListener.java
 E:\projetosthunder\RedeSly\SlyAPI\src\main\java\net\valhallacodes\slyapi\managers\HomeManager.java
 E:\projetosthunder\RedeSly\SlyAPI\src\main\java\net\valhallacodes\slyapi\managers\TPAManager.java
 E:\projetosthunder\RedeSly\SlyAPI\src\main\java\net\valhallacodes\slyapi\commands\TPACommand.java
@@ -10,8 +11,10 @@ E:\projetosthunder\RedeSly\SlyAPI\src\main\java\net\valhallacodes\slyapi\SlyAPI.
 E:\projetosthunder\RedeSly\SlyAPI\src\main\java\net\valhallacodes\slyapi\commands\DelWarpCommand.java
 E:\projetosthunder\RedeSly\SlyAPI\src\main\java\net\valhallacodes\slyapi\commands\SetHomeCommand.java
 E:\projetosthunder\RedeSly\SlyAPI\src\main\java\net\valhallacodes\slyapi\managers\ClanManager.java
+E:\projetosthunder\RedeSly\SlyAPI\src\main\java\net\valhallacodes\slyapi\utils\MessageUtils.java
 E:\projetosthunder\RedeSly\SlyAPI\src\main\java\net\valhallacodes\slyapi\commands\SetWarpCommand.java
 E:\projetosthunder\RedeSly\SlyAPI\src\main\java\net\valhallacodes\slyapi\commands\HomeCommand.java
 E:\projetosthunder\RedeSly\SlyAPI\src\main\java\net\valhallacodes\slyapi\commands\TPDenyCommand.java
 E:\projetosthunder\RedeSly\SlyAPI\src\main\java\net\valhallacodes\slyapi\commands\TPAcceptCommand.java
 E:\projetosthunder\RedeSly\SlyAPI\src\main\java\net\valhallacodes\slyapi\database\DatabaseManager.java
+E:\projetosthunder\RedeSly\SlyAPI\src\main\java\net\valhallacodes\slyapi\listeners\TeleportListener.java

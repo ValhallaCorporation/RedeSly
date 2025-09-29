@@ -1,6 +1,7 @@
 package net.valhallacodes.slyapi.commands;
 
 import net.valhallacodes.slyapi.SlyAPI;
+import net.valhallacodes.slyapi.utils.MessageUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,19 +16,19 @@ public class SetWarpCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.only-players"));
+            MessageUtils.sendMessage(sender, SlyAPI.getInstance().getConfig().getString("messages.only-players"));
             return true;
         }
         
         Player player = (Player) sender;
         
         if (!player.hasPermission("slycore.warp.set")) {
-            player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.no-permission"));
+            MessageUtils.sendMessage(player, SlyAPI.getInstance().getConfig().getString("messages.no-permission"));
             return true;
         }
         
         if (args.length == 0) {
-            player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.setwarp-usage"));
+            MessageUtils.sendMessage(player, SlyAPI.getInstance().getConfig().getString("messages.setwarp-usage"));
             return true;
         }
         
@@ -47,12 +48,12 @@ public class SetWarpCommand implements CommandExecutor {
                 stmt.setFloat(7, location.getPitch());
                 stmt.executeUpdate();
                 
-                player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.warp-set")
+                MessageUtils.sendMessage(player, SlyAPI.getInstance().getConfig().getString("messages.warp-set")
                         .replace("%warp%", warpName));
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.warp-set-failed"));
+            MessageUtils.sendMessage(player, SlyAPI.getInstance().getConfig().getString("messages.warp-set-failed"));
         }
         
         return true;

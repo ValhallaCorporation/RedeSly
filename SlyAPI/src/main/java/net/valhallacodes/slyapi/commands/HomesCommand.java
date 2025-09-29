@@ -2,6 +2,7 @@ package net.valhallacodes.slyapi.commands;
 
 import net.valhallacodes.slyapi.SlyAPI;
 import net.valhallacodes.slyapi.managers.HomeManager;
+import net.valhallacodes.slyapi.utils.MessageUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -20,7 +21,7 @@ public class HomesCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.only-players"));
+            MessageUtils.sendMessage(sender, SlyAPI.getInstance().getConfig().getString("messages.only-players"));
             return true;
         }
         
@@ -29,7 +30,7 @@ public class HomesCommand implements CommandExecutor {
         java.util.List<String> homes = SlyAPI.getInstance().getHomeManager().getPlayerHomes(player.getName());
         
         if (homes.isEmpty()) {
-            player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.no-homes"));
+            MessageUtils.sendMessage(player, SlyAPI.getInstance().getConfig().getString("messages.no-homes"));
             return true;
         }
         

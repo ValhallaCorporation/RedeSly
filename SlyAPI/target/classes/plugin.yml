@@ -3,7 +3,7 @@ version: 1.0.0
 main: net.valhallacodes.slyapi.SlyAPI
 author: ValhallaCodes
 api-version: 1.13
-depend: [Vault]
+softdepend: [Vault]
 
 commands:
   clan:

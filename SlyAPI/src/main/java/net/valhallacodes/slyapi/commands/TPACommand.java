@@ -1,6 +1,7 @@
 package net.valhallacodes.slyapi.commands;
 
 import net.valhallacodes.slyapi.SlyAPI;
+import net.valhallacodes.slyapi.utils.MessageUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,14 +13,14 @@ public class TPACommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.only-players"));
+            MessageUtils.sendMessage(sender, SlyAPI.getInstance().getConfig().getString("messages.only-players"));
             return true;
         }
         
         Player player = (Player) sender;
         
         if (args.length == 0) {
-            player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.tpa-usage"));
+            MessageUtils.sendMessage(player, SlyAPI.getInstance().getConfig().getString("messages.tpa-usage"));
             return true;
         }
         
@@ -27,29 +28,29 @@ public class TPACommand implements CommandExecutor {
         Player target = Bukkit.getPlayer(targetName);
         
         if (target == null) {
-            player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.player-not-found"));
+            MessageUtils.sendMessage(player, SlyAPI.getInstance().getConfig().getString("messages.player-not-found"));
             return true;
         }
         
         if (target == player) {
-            player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.cannot-tpa-self"));
+            MessageUtils.sendMessage(player, SlyAPI.getInstance().getConfig().getString("messages.cannot-tpa-self"));
             return true;
         }
         
         if (SlyAPI.getInstance().getTPAManager().hasPendingRequest(player)) {
-            player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.tpa-pending-request"));
+            MessageUtils.sendMessage(player, SlyAPI.getInstance().getConfig().getString("messages.tpa-pending-request"));
             return true;
         }
         
         if (SlyAPI.getInstance().getTPAManager().sendRequest(player, target)) {
-            player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.tpa-sent")
+            MessageUtils.sendMessage(player, SlyAPI.getInstance().getConfig().getString("messages.tpa-sent")
                     .replace("%target%", target.getName()));
             
-            target.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.tpa-received")
+            MessageUtils.sendMessage(target, SlyAPI.getInstance().getConfig().getString("messages.tpa-received")
                     .replace("%requester%", player.getName()));
-            target.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.tpa-commands"));
+            MessageUtils.sendMessage(target, SlyAPI.getInstance().getConfig().getString("messages.tpa-commands"));
         } else {
-            player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.tpa-failed"));
+            MessageUtils.sendMessage(player, SlyAPI.getInstance().getConfig().getString("messages.tpa-failed"));
         }
         
         return true;

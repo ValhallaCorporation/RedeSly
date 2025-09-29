@@ -1,6 +1,7 @@
 package net.valhallacodes.slyapi.commands;
 
 import net.valhallacodes.slyapi.SlyAPI;
+import net.valhallacodes.slyapi.utils.MessageUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,19 +16,19 @@ public class DelWarpCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.only-players"));
+            MessageUtils.sendMessage(sender, SlyAPI.getInstance().getConfig().getString("messages.only-players"));
             return true;
         }
         
         Player player = (Player) sender;
         
         if (!player.hasPermission("slycore.warp.delete")) {
-            player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.no-permission"));
+            MessageUtils.sendMessage(player, SlyAPI.getInstance().getConfig().getString("messages.no-permission"));
             return true;
         }
         
         if (args.length == 0) {
-            player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.delwarp-usage"));
+            MessageUtils.sendMessage(player, SlyAPI.getInstance().getConfig().getString("messages.delwarp-usage"));
             return true;
         }
         
@@ -40,16 +41,16 @@ public class DelWarpCommand implements CommandExecutor {
                 int rowsAffected = stmt.executeUpdate();
                 
                 if (rowsAffected > 0) {
-                    player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.warp-deleted")
+                    MessageUtils.sendMessage(player, SlyAPI.getInstance().getConfig().getString("messages.warp-deleted")
                             .replace("%warp%", warpName));
                 } else {
-                    player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.warp-not-found")
+                    MessageUtils.sendMessage(player, SlyAPI.getInstance().getConfig().getString("messages.warp-not-found")
                             .replace("%warp%", warpName));
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.warp-delete-failed"));
+            MessageUtils.sendMessage(player, SlyAPI.getInstance().getConfig().getString("messages.warp-delete-failed"));
         }
         
         return true;

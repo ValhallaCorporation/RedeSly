@@ -24,9 +24,13 @@ public class TeleportListener implements Listener {
             Player target = SlyAPI.getInstance().getServer().getPlayer(targetName);
             
             if (target != null && target.isOnline()) {
-                player.teleport(target.getLocation());
-                player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.teleported-to-player")
-                        .replace("%player%", targetName));
+                SlyAPI.getInstance().getServer().getScheduler().runTaskLater(SlyAPI.getInstance(), () -> {
+                    if (player.isOnline() && target.isOnline()) {
+                        player.teleport(target.getLocation());
+                        player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.teleported-to-player")
+                                .replace("%player%", targetName));
+                    }
+                }, 20L);
             }
         }
     }

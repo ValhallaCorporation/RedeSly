@@ -1,6 +1,7 @@
 package net.valhallacodes.slyapi.commands;
 
 import net.valhallacodes.slyapi.SlyAPI;
+import net.valhallacodes.slyapi.utils.MessageUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,14 +17,14 @@ public class WarpCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.only-players"));
+            MessageUtils.sendMessage(sender, SlyAPI.getInstance().getConfig().getString("messages.only-players"));
             return true;
         }
         
         Player player = (Player) sender;
         
         if (args.length == 0) {
-            player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.warp-usage"));
+            MessageUtils.sendMessage(player, SlyAPI.getInstance().getConfig().getString("messages.warp-usage"));
             return true;
         }
         
@@ -37,7 +38,7 @@ public class WarpCommand implements CommandExecutor {
                     if (rs.next()) {
                         org.bukkit.World world = SlyAPI.getInstance().getServer().getWorld(rs.getString("world"));
                         if (world == null) {
-                            player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.warp-world-not-found"));
+                            MessageUtils.sendMessage(player, SlyAPI.getInstance().getConfig().getString("messages.warp-world-not-found"));
                             return true;
                         }
                         
@@ -51,10 +52,10 @@ public class WarpCommand implements CommandExecutor {
                         );
                         
                         player.teleport(location);
-                        player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.teleported-to-warp")
+                        MessageUtils.sendMessage(player, SlyAPI.getInstance().getConfig().getString("messages.teleported-to-warp")
                                 .replace("%warp%", warpName));
                     } else {
-                        player.sendMessage(SlyAPI.getInstance().getConfig().getString("messages.warp-not-found")
+                        MessageUtils.sendMessage(player, SlyAPI.getInstance().getConfig().getString("messages.warp-not-found")
                                 .replace("%warp%", warpName));
                     }
                 }
