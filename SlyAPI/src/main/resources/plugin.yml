@@ -1,0 +1,96 @@
+name: SlyAPI
+version: 1.0.0
+main: net.valhallacodes.slyapi.SlyAPI
+author: ValhallaCodes
+api-version: 1.13
+depend: [Vault]
+
+commands:
+  clan:
+    description: Sistema de clans
+    usage: /clan <subcomando>
+    permission: slycore.clan
+  homes:
+    description: Abre GUI de homes
+    usage: /homes
+    permission: slycore.homes
+  home:
+    description: Teleporta para uma home
+    usage: /home <nome>
+    permission: slycore.home
+  sethome:
+    description: Define uma home
+    usage: /sethome <nome>
+    permission: slycore.sethome
+  delhome:
+    description: Remove uma home
+    usage: /delhome <nome>
+    permission: slycore.delhome
+  warp:
+    description: Teleporta para um warp
+    usage: /warp <nome>
+    permission: slycore.warp
+  setwarp:
+    description: Define um warp
+    usage: /setwarp <nome>
+    permission: slycore.warp.set
+  delwarp:
+    description: Remove um warp
+    usage: /delwarp <nome>
+    permission: slycore.warp.delete
+  tpa:
+    description: Solicita teleporte
+    usage: /tpa <jogador>
+    permission: slycore.tpa
+  tpaccept:
+    description: Aceita teleporte
+    usage: /tpaccept
+    permission: slycore.tpa
+  tpdeny:
+    description: Nega teleporte
+    usage: /tpdeny
+    permission: slycore.tpa
+
+permissions:
+  slycore.clan:
+    description: Permite usar comandos de clan
+    default: true
+  slycore.homes:
+    description: Permite abrir GUI de homes
+    default: true
+  slycore.home:
+    description: Permite usar comando home
+    default: true
+  slycore.sethome:
+    description: Permite definir homes
+    default: true
+  slycore.delhome:
+    description: Permite remover homes
+    default: true
+  slycore.warp:
+    description: Permite usar warps
+    default: true
+  slycore.warp.set:
+    description: Permite definir warps
+    default: op
+  slycore.warp.delete:
+    description: Permite remover warps
+    default: op
+  slycore.tpa:
+    description: Permite usar sistema de TPA
+    default: true
+  slycore.home.1:
+    description: Permite ter 1 home
+    default: true
+  slycore.home.2:
+    description: Permite ter 2 homes
+    default: false
+  slycore.home.3:
+    description: Permite ter 3 homes
+    default: false
+  slycore.home.4:
+    description: Permite ter 4 homes
+    default: false
+  slycore.home.5:
+    description: Permite ter 5 homes
+    default: false

@@ -1,0 +1,4 @@
+name: SlyCore
+version: 1.0.0
+main: net.valhallacodes.slycore.SlycoreBungee
+author: ValhallaCodes
